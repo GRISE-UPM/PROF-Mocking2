@@ -1,8 +1,11 @@
 package es.upm.grise.profundizacion.mocking_ejercicio_2;
 
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.BDDMockito.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,7 +14,8 @@ class SmokeTest {
 	@Test
 	public void dosApellidos() throws Exception {
 		//Creamos el usuario de prueba
-		Customer customerEjemplo = new Customer();
+
+		/*Customer customerEjemplo = new Customer();
 		customerEjemplo.setFirstName("Omar");
 		customerEjemplo.setLastName1("Mokrani");
 		customerEjemplo.setLastName2("Gallego");
@@ -19,6 +23,19 @@ class SmokeTest {
 		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
 		CustomerReader customerReader = new CustomerReader(entityManager);
 		assertEquals("Omar Mokrani Gallego",customerReader.findFullName(1L));
+		*/
+		
+		
+		Customer customerEjemplo = mock(Customer.class);
+		when(customerEjemplo.getFirstName()).thenReturn("Omar");
+		when(customerEjemplo.getLastName1()).thenReturn("Mokrani");
+		when(customerEjemplo.getLastName2()).thenReturn("Gallego");
+		
+		EntityManager entityManager = mock(EntityManager.class);
+		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
+		CustomerReader customerReader = new CustomerReader(entityManager);
+		assertEquals("Omar Mokrani Gallego",customerReader.findFullName(1L));
+		
 		}
 	
 	@Test
@@ -43,6 +60,8 @@ class SmokeTest {
 		EntityManager entityManager = mock(EntityManager.class);
 		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
 		
+		CustomerReader customerReader = new CustomerReader(entityManager);
+		Assertions.assertThrows(Exception.class, () -> {customerReader.findFullName(1L);});
 		
 		}
 	
