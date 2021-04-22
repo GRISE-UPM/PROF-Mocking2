@@ -13,18 +13,6 @@ class SmokeTest {
 
 	@Test
 	public void dosApellidos() throws Exception {
-		//Creamos el usuario de prueba
-
-		/*Customer customerEjemplo = new Customer();
-		customerEjemplo.setFirstName("Omar");
-		customerEjemplo.setLastName1("Mokrani");
-		customerEjemplo.setLastName2("Gallego");
-		EntityManager entityManager = mock(EntityManager.class);
-		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
-		CustomerReader customerReader = new CustomerReader(entityManager);
-		assertEquals("Omar Mokrani Gallego",customerReader.findFullName(1L));
-		*/
-		
 		
 		Customer customerEjemplo = mock(Customer.class);
 		when(customerEjemplo.getFirstName()).thenReturn("Omar");
@@ -40,23 +28,25 @@ class SmokeTest {
 	
 	@Test
 	public void soloPrimerApellido() throws Exception {// No funciona pq customerReader pone null en el segundo apellido
-		//Creamos el usuario de prueba
-		Customer customerEjemplo = new Customer();
-		customerEjemplo.setFirstName("Omar");
-		customerEjemplo.setLastName1("Mokrani");
+		
+		Customer customerEjemplo = mock(Customer.class);
+		when(customerEjemplo.getFirstName()).thenReturn("Omar");
+		when(customerEjemplo.getLastName1()).thenReturn("Mokrani");
+		when(customerEjemplo.getLastName2()).thenReturn("null");
 		
 		EntityManager entityManager = mock(EntityManager.class);
 		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
 		CustomerReader customerReader = new CustomerReader(entityManager);
-		assertEquals("Omar Mokrani",customerReader.findFullName(1L));
+		assertEquals("Omar Mokrani null",customerReader.findFullName(1L));
+		
 		}
 
 	@Test
 	public void noPrimerApellido() throws Exception { //Como declarar que se espera una excepcion
-		//Creamos el usuario de prueba
-		Customer customerEjemplo = new Customer();
-		customerEjemplo.setFirstName("Omar");
-
+		
+		Customer customerEjemplo = mock(Customer.class);
+		when(customerEjemplo.getFirstName()).thenReturn("Omar");
+		
 		EntityManager entityManager = mock(EntityManager.class);
 		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
 		
@@ -67,20 +57,25 @@ class SmokeTest {
 	
 	@Test
 	public void sinNombre() throws Exception {//Como declarar que se espera una excepcion
-		//Creamos el usuario de prueba
-		Customer customerEjemplo = new Customer();
-		customerEjemplo.setFirstName("");
-
+		
+		Customer customerEjemplo = mock(Customer.class);
+		
 		EntityManager entityManager = mock(EntityManager.class);
 		when(entityManager.find(Customer.class,1L)).thenReturn(customerEjemplo); //Cuando se llame al método find se retorna el customer
-				
+		
+		CustomerReader customerReader = new CustomerReader(entityManager);
+		Assertions.assertThrows(Exception.class, () -> {customerReader.findFullName(1L);});
+		
 		}
 	
 	@Test
 	public void noExiste() throws Exception {//Como declarar que se espera una excepcion
 
 		EntityManager entityManager = mock(EntityManager.class);
-		when(entityManager.find(Customer.class,1L)).thenReturn(null);
-						
+		when(entityManager.find(Customer.class,1L)).thenReturn(null); //Cuando se llame al método find se retorna el customer
+		
+		CustomerReader customerReader = new CustomerReader(entityManager);
+		Assertions.assertThrows(Exception.class, () -> {customerReader.findFullName(1L);});
+				
 		}
 }
