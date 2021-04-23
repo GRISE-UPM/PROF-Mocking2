@@ -1,6 +1,6 @@
 ## Ejercicio 2
 
-### From: https://semaphoreci.com/community/tutorials/stubbing-and-mocking-with-mockito-2-and-junit, with changes applied (March 1, 2021)
+### Obtenido de: https://semaphoreci.com/community/tutorials/stubbing-and-mocking-with-mockito-2-and-junit, con cambios.
 
 **Se pide:** Realice la prueba de unidad de la clase *CustomerRead* usando mocks. La libería de *mock* deberá ser *Mockito*. Deberá implementar los tests:
 
