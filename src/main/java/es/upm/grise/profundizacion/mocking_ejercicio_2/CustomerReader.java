@@ -10,7 +10,7 @@ public class CustomerReader {
 
 	public String findFullName(Long customerID) throws Exception{
 		
-		Customer customer = entityManager.find(Customer.class, customerID);
+		Customer customer = entityManager.find(customerID);
 		
 		if(customer == null)
 			throw new Exception("Customer not found");
