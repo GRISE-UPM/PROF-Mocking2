@@ -15,10 +15,10 @@ public class CustomerReader {
 		if(customer == null)
 			throw new Exception("Customer not found");
 		
-		if(customer.getFirstName().isEmpty() || customer.getFirstName() == null) 
+		if(customer.getFirstName() == null || customer.getFirstName().isEmpty()) 
 			throw new Exception("Customer first name empty");
 		
-		if(customer.getLastName1().isEmpty() || customer.getLastName1() == null) 
+		if(customer.getLastName1() == null || customer.getLastName1().isEmpty()) 
 			throw new Exception("Customer last name 1 empty");
 		
 		return customer.getFirstName() + " " + customer.getLastName1() + " " + customer.getLastName2();
