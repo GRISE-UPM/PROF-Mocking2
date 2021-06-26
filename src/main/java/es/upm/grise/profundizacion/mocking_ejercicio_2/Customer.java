@@ -12,6 +12,22 @@ public class Customer {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName1(String lastName1) {
+		this.lastName1 = lastName1;
+	}
+
+	public void setLastName2(String lastName2) {
+		this.lastName2 = lastName2;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
